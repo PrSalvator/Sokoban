@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sokoban", "Sokoban.csproj", "{3E5B44D6-44BA-4EDC-9810-6396C7072EDA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{2578DAC3-276F-452C-9D1D-B1A23BBAC7BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E5B44D6-44BA-4EDC-9810-6396C7072EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E5B44D6-44BA-4EDC-9810-6396C7072EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E5B44D6-44BA-4EDC-9810-6396C7072EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E5B44D6-44BA-4EDC-9810-6396C7072EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2578DAC3-276F-452C-9D1D-B1A23BBAC7BE}.Debug|Any CPU.ActiveCfg = Debug
+		{2578DAC3-276F-452C-9D1D-B1A23BBAC7BE}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB8A0E13-378D-406B-8D9D-09A2884E63FA}
+	EndGlobalSection
+EndGlobal

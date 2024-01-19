@@ -1,0 +1,110 @@
+﻿<Window x:Class="Sokoban.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sokoban.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200" Name="window"
+        WindowState="Maximized">
+    <Window.Style >
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVisiable}" Value="False">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsVisiable}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="./Fonts/#KellySlab"/>
+        </Style>
+        <ControlTemplate x:Key="btnTemplate" TargetType="Button">
+            <Border CornerRadius="10" Background="{StaticResource LightBorderBrushColor}"
+                    Width="150" Height="150" Name="border">
+                <Polygon Fill="{StaticResource GameBackground}" Points="40, 20, 130, 75, 40, 130"
+                         StrokeEndLineCap="Round" StrokeThickness="15" 
+                         Stroke="{StaticResource GameBackground}" 
+                         StrokeLineJoin="Round" Name="polygon"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="border" Property="Background" Value="{StaticResource GameBackground}"/>
+                    <Setter TargetName="polygon" Property="Fill" Value="{StaticResource LightBorderBrushColor}"/>
+                    <Setter TargetName="polygon" Property="Stroke" Value="{StaticResource LightBorderBrushColor}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="{StaticResource LightBorderBrushColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="75*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="88*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="СОКОБАН" VerticalAlignment="Center" 
+            HorizontalAlignment="Center" FontSize="40"
+            Foreground="{StaticResource LightBorderBrushColor}"
+            Panel.ZIndex="1"/>
+        <Grid Background="{StaticResource BoxColor}" Grid.RowSpan="2" Panel.ZIndex="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="1" Template="{StaticResource btnTemplate}" 
+                    Command="{Binding StartGameCommand}"/>
+        </Grid>
+        <TextBlock Text="Главное меню" Grid.Column="1" FontSize="40" 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+        <ListBox Background="Transparent" Grid.Column="1" 
+          Grid.Row="1" Margin="30"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          BorderThickness="0"
+          ItemsSource="{x:Static local:Levels.levelsDictionary}"
+          SelectedItem="{Binding SelectedLevel}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <ContentControl>
+                                    <Border Width="180" Height="180" 
+                                        Background="{StaticResource GameBackground}"
+                                        Margin="33 10 33 10" Name="border"
+                                        CornerRadius="10">
+                                        <TextBlock Text="{Binding Path=Key}" FontSize="40" 
+                                            Foreground="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ContentControl>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="border" Property="Border.BorderBrush" Value="{StaticResource LightBorderBrushColor}"/>
+                                        <Setter TargetName="border" Property="Border.BorderThickness" Value="5"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding Path=Value.IsComplete}" Value="True">
+                                        <Setter TargetName="border" Property="Border.Background" Value="{StaticResource PinkColor}"/>
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Window>
